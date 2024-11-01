@@ -33,18 +33,7 @@ const routes: Routes = [
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
     canActivate: [AuthGuard],
   },
-  {
-    path: 'escaner',
-    loadChildren: () => import('./escaner/escaner.module').then( m => m.EscanerPageModule)
-  },
-  {
-    path: 'scanner-qr',
-    loadChildren: () => import('./scanner-qr/scanner-qr.module').then( m => m.ScannerQRPageModule)
-  },
-  {
-    path: 'asistencias',
-    loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
-  },
+  
   
 ];
 
