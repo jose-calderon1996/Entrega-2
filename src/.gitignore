@@ -1,0 +1,6 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar archivos temporales de Python
+*.pyc
+__pycache__/
