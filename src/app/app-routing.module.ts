@@ -37,6 +37,10 @@ const routes: Routes = [
     path: 'escaner',
     loadChildren: () => import('./escaner/escaner.module').then( m => m.EscanerPageModule)
   },
+  {
+    path: 'scanner-qr',
+    loadChildren: () => import('./scanner-qr/scanner-qr.module').then( m => m.ScannerQRPageModule)
+  },
   
 ];
 
