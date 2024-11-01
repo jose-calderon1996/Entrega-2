@@ -32,7 +32,11 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
     canActivate: [AuthGuard],
+  },  {
+    path: 'escaneo',
+    loadChildren: () => import('./escaneo/escaneo.module').then( m => m.EscaneoPageModule)
   },
+
   
   
 ];
