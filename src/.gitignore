@@ -4,3 +4,5 @@ node_modules/
 # Ignorar archivos temporales de Python
 *.pyc
 __pycache__/
+
+.angular/cache
