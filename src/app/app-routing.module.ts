@@ -45,10 +45,6 @@ const routes: Routes = [
     path: 'asistencias',
     loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
   },
-  {
-    path: 'escaner-qr',
-    loadChildren: () => import('./escaner-qr/escaner-qr.module').then( m => m.EscanerQRPageModule)
-  },
   
 ];
 
