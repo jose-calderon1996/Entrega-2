@@ -19,28 +19,28 @@ const routes: Routes = [
     path: 'registro-estudiantil',
     loadChildren: () => import('./registro-estudiantil/registro-estudiantil.module').then(m => m.RegistroEstudiantilPageModule),
   },
-  
-   
-  
+
+
+
   {
     path: 'cambio-pass',
     loadChildren: () => import('./cambio-pass/cambio-pass.module').then(m => m.CambioPassPageModule),
     canActivate: [AuthGuard],
   },
-  
+
   {
     path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule),
     canActivate: [AuthGuard],
   },
-  
 
-  
-  
+
+
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
