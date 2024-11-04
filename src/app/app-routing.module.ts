@@ -36,6 +36,10 @@ const routes: Routes = [
     path: 'escaneo',
     loadChildren: () => import('./escaneo/escaneo.module').then( m => m.EscaneoPageModule)
   },
+  {
+    path: 'scanner-qr',
+    loadChildren: () => import('./scanner-qr/scanner-qr.module').then( m => m.ScannerQRPageModule)
+  },
 
   
   
