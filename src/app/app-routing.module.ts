@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'codigo-qr',
     loadChildren: () => import('./codigo-qr/codigo-qr.module').then( m => m.CodigoQrPageModule)
   },
+  {
+    path: 'asistencias',
+    loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
+  },
 
   
   
