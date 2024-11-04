@@ -1,7 +1,7 @@
-# Node modules
+# Dependencias de Node.js
 node_modules/
 
-# Ionic build folders
+# Archivos de salida de construcción de Ionic
 www/
 platforms/
 plugins/
@@ -10,7 +10,8 @@ plugins/
 ios/
 android/
 
-# Otros archivos innecesarios
+# Archivos de configuración y caché locales
 .env
 .vscode/
+.idea/
 *.log
