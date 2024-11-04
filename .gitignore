@@ -1,8 +1,16 @@
-# Ignorar node_modules
+# Node modules
 node_modules/
 
-# Ignorar archivos temporales de Python
-*.pyc
-__pycache__/
+# Ionic build folders
+www/
+platforms/
+plugins/
 
-node_modules/
+# Capacitor files
+ios/
+android/
+
+# Otros archivos innecesarios
+.env
+.vscode/
+*.log
