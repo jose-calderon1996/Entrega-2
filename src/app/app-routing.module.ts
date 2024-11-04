@@ -32,26 +32,8 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
     canActivate: [AuthGuard],
-  },  {
-    path: 'escaneo',
-    loadChildren: () => import('./escaneo/escaneo.module').then( m => m.EscaneoPageModule)
   },
-  {
-    path: 'scanner-qr',
-    loadChildren: () => import('./scanner-qr/scanner-qr.module').then( m => m.ScannerQRPageModule)
-  },
-  {
-    path: 'codigo-qr',
-    loadChildren: () => import('./codigo-qr/codigo-qr.module').then( m => m.CodigoQrPageModule)
-  },
-  {
-    path: 'asistencias',
-    loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
-  },
-  {
-    path: 'historiales',
-    loadChildren: () => import('./historiales/historiales.module').then( m => m.HistorialesPageModule)
-  },
+
 
   
   
