@@ -48,6 +48,10 @@ const routes: Routes = [
     path: 'asistencias',
     loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
   },
+  {
+    path: 'historiales',
+    loadChildren: () => import('./historiales/historiales.module').then( m => m.HistorialesPageModule)
+  },
 
   
   
