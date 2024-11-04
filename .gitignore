@@ -15,3 +15,5 @@ android/
 .vscode/
 .idea/
 *.log
+
+.angular/cache
