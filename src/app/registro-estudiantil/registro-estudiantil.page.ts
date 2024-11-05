@@ -2,20 +2,25 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { RegistroUsuario } from '../models/usuario.interface';
 
 @Component({
   selector: 'app-registro-estudiantil',
   templateUrl: './registro-estudiantil.page.html',
 })
 export class RegistroEstudiantilPage {
-  correo: string = '';
-  contrasena: string = '';
-  nombre: string = '';
-  comuna: string = '';
-  direccion: string = '';
-  fechaNacimiento: string = '';
-  carrera: string = '';
-  userData: unknown;
+  userData: null | undefined;
+
+  datosUsuario: RegistroUsuario = {
+    nombre: '',
+    comuna: '',
+    direccion: '',
+    fechaNacimiento: '',
+    carrera: '',
+    correo: '',
+    contrasena: ''
+  };
+ 
 
   constructor(
     private authService: AuthService,
@@ -26,40 +31,53 @@ export class RegistroEstudiantilPage {
   ) {}
 
   async ngOnInit() {
-    this.userData = null; 
+    this.datosUsuario; 
   }
 
   async registrar() {
-    const loading = await this.loadingController.create({
-      message: 'Registrando...',
-      spinner: 'crescent',
-    });
-    await loading.present();
+    // Validación simple sin métodos avanzados
+    if (
+      !this.datosUsuario.nombre || 
+      !this.datosUsuario.comuna || 
+      !this.datosUsuario.direccion || 
+      !this.datosUsuario.fechaNacimiento || 
+      !this.datosUsuario.carrera || 
+      !this.datosUsuario.correo || 
+      !this.datosUsuario.contrasena
+    ) {
+      this.mostrarToast('Por favor, completa todos los campos');
+      return;
+    }
 
     try {
-      const userCredential = await this.authService.register(this.correo, this.contrasena);
-      
-      if (userCredential.user) {
-        await this.authService.saveUserData(userCredential.user.uid, {
-          nombre: this.nombre,
-          comuna: this.comuna,
-          direccion: this.direccion,
-          fechaNacimiento: this.fechaNacimiento,
-          carrera: this.carrera
-        });
-        this.mostrarToast('Registro exitoso');
-        this.router.navigate(['/home']);
-      } else {
-        this.mostrarToast('Error en el registro');
-      }
+        // Registro de usuario en Firebase Authentication
+        const userCredential = await this.authService.register(this.datosUsuario.correo, this.datosUsuario.contrasena);
+
+        if (userCredential.user) {
+            // Guardar datos adicionales del usuario en Firestore
+            await this.authService.saveUserData(userCredential.user.uid, {
+                nombre: this.datosUsuario.nombre,
+                comuna: this.datosUsuario.comuna,
+                direccion: this.datosUsuario.direccion,
+                fechaNacimiento: this.datosUsuario.fechaNacimiento,
+                carrera: this.datosUsuario.carrera
+            });
+            this.mostrarToast('Registro exitoso');
+            this.router.navigate(['/home']); // Redirigir al usuario a la página de inicio
+        } else {
+            this.mostrarToast('Error en el registro');
+        }
 
     } catch (error) {
-      this.mostrarToast('Error en el registro');
-      console.error('Error en el registro:', error);
-    } finally {
-      await loading.dismiss();
+        this.mostrarToast('Error en el registro');
+        console.error('Error en el registro:', error);
     }
   }
+
+  private mostrarToast1(mensaje: string) {
+    console.log(mensaje); // Implementación básica
+  }
+
 
   async mostrarToast(message: string) {
     const toast = await this.toastController.create({
