@@ -35,7 +35,7 @@ export class RegistroEstudiantilPage {
   }
 
   async registrar() {
-    // Validación simple sin métodos avanzados
+    // Validación de campos
     if (
       !this.datosUsuario.nombre || 
       !this.datosUsuario.comuna || 
@@ -49,47 +49,57 @@ export class RegistroEstudiantilPage {
       return;
     }
 
-    try {
-        // Registro de usuario en Firebase Authentication
-        const userCredential = await this.authService.register(this.datosUsuario.correo, this.datosUsuario.contrasena);
+    // Mostrar animación de "Registrando usuario"
+    const loading = await this.loadingController.create({
+      message: 'Registrando usuario...',
+      duration: 3000 // Duración máxima de la animación de carga: 3 segundos
+    });
+    await loading.present();
 
-        if (userCredential.user) {
-            // Guardar datos adicionales del usuario en Firestore
-            await this.authService.saveUserData(userCredential.user.uid, {
-                nombre: this.datosUsuario.nombre,
-                comuna: this.datosUsuario.comuna,
-                direccion: this.datosUsuario.direccion,
-                fechaNacimiento: this.datosUsuario.fechaNacimiento,
-                carrera: this.datosUsuario.carrera
-            });
-            this.mostrarToast('Registro exitoso');
-            this.router.navigate(['/home']); // Redirigir al usuario a la página de inicio
-        } else {
-            this.mostrarToast('Error en el registro');
-        }
+    try {
+      // Registro de usuario en Firebase Authentication
+      const userCredential = await this.authService.register(this.datosUsuario.correo, this.datosUsuario.contrasena);
+
+      if (userCredential.user) {
+        // Guardar datos adicionales en Firestore
+        await this.authService.saveUserData(userCredential.user.uid, {
+          nombre: this.datosUsuario.nombre,
+          comuna: this.datosUsuario.comuna,
+          direccion: this.datosUsuario.direccion,
+          fechaNacimiento: this.datosUsuario.fechaNacimiento,
+          carrera: this.datosUsuario.carrera
+        });
+        
+        this.mostrarToast('Registro exitoso');
+        this.navCtrl.navigateForward('/login'); // Navegar a la página de inicio de sesión
+      } else {
+        this.mostrarToast('Error en el registro');
+      }
 
     } catch (error) {
+      // captura mi error de correo existente 
+      if (error === 'auth/email-already-in-use') {
+        this.mostrarToast('El correo ya está en uso por otra cuenta');
+      } else {
         this.mostrarToast('Error en el registro');
         console.error('Error en el registro:', error);
+      }
+    } finally {
+      // Cerrar animación de carga independientemente del resultado
+      loading.dismiss();
     }
   }
-
-  private mostrarToast1(mensaje: string) {
-    console.log(mensaje); // Implementación básica
-  }
-
 
   async mostrarToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
       position: 'top',
-      color: 'success',
+      color: 'danger',
     });
     await toast.present();
   }
 
-  // Función para navegar a la página de inicio de sesión
   navigateToLogin() {
     this.navCtrl.navigateBack('/login'); 
   }
