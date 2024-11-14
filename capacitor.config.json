@@ -1,1 +1,7 @@
-{}
+{
+    "appId": "com.example.miapp", 
+    "appName": "MiApp",
+    "webDir": "www",
+    "bundledWebRuntime": false
+  }
+  

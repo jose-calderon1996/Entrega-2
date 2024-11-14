@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
 
+=======
+    package="com.example.miapp">  <!-- Asegúrate de que este valor coincida con el namespace -->
+>>>>>>> 6e0e824a83186918ea325ee166e812b58da2d78c
 
     <application
         android:allowBackup="true"
@@ -32,6 +36,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
+<<<<<<< HEAD
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
@@ -39,4 +44,12 @@
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+=======
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+    </application>
+
+    <!-- Permisos -->
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> 6e0e824a83186918ea325ee166e812b58da2d78c
 </manifest>
